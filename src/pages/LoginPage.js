@@ -1,7 +1,10 @@
+import {useEffect} from "react";
 import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Link, Container, Typography, Divider, Stack, Button } from '@mui/material';
+import {useNavigate} from "react-router-dom";
+import {useWeb3} from "../contexts/Web3Context";
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -43,6 +46,19 @@ const StyledContent = styled('div')(({ theme }) => ({
 export default function LoginPage() {
   const mdUp = useResponsive('up', 'md');
 
+  const {web3, setData} = useWeb3();
+
+  const connectWithMetamask = async () => {
+    try {
+      await window.ethereum.enable();
+      const accounts = await web3.eth.getAccounts();
+      setData(prev => ({...prev, address: accounts[0]}));
+      window.location.assign("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <Helmet>
@@ -70,7 +86,7 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Sign in
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
@@ -91,6 +107,16 @@ export default function LoginPage() {
                 <Iconify icon="eva:twitter-fill" color="#1C9CEA" width={22} height={22} />
               </Button>
             </Stack>
+
+            <Divider sx={{ my: 3 }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                OR
+              </Typography>
+            </Divider>
+
+            <Button fullWidth size="large" color="inherit" variant="outlined" onClick={connectWithMetamask}>
+              Login with Metamask
+            </Button>
 
             <Divider sx={{ my: 3 }}>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

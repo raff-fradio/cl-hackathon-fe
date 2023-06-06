@@ -1,3 +1,4 @@
+import {useEffect} from "react";
 import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
@@ -5,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 // components
 import Iconify from '../components/iconify';
+import {useWeb3} from "../contexts/Web3Context";
 // sections
 import {
   AppTasks,
@@ -22,6 +24,11 @@ import {
 
 export default function DashboardAppPage() {
   const theme = useTheme();
+  const {web3, data} = useWeb3();
+
+  useEffect(() => {
+    console.log(data);
+  }, [])
 
   return (
     <>

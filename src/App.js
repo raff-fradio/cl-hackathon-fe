@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import {Web3Provider} from "./contexts/Web3Context";
 // routes
 import Router from './routes';
 // theme
@@ -15,9 +16,11 @@ export default function App() {
     <HelmetProvider>
       <BrowserRouter>
         <ThemeProvider>
-          <ScrollToTop />
-          <StyledChart />
-          <Router />
+          <Web3Provider>
+            <ScrollToTop />
+            <StyledChart />
+            <Router />
+          </Web3Provider>
         </ThemeProvider>
       </BrowserRouter>
     </HelmetProvider>
