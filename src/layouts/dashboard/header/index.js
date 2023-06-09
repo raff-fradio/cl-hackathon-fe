@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import {useWeb3} from "../../../contexts/Web3Context";
 // utils
 import { bgBlur } from '../../../utils/cssStyles';
 // components
@@ -43,36 +44,40 @@ Header.propTypes = {
 };
 
 export default function Header({ onOpenNav }) {
+  const {data} = useWeb3();
+
   return (
     <StyledRoot>
-      <StyledToolbar>
-        <IconButton
-          onClick={onOpenNav}
-          sx={{
-            mr: 1,
-            color: 'text.primary',
-            display: { lg: 'none' },
-          }}
-        >
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
+      {data.loggedIn &&
+        <StyledToolbar>
+          <IconButton
+            onClick={onOpenNav}
+            sx={{
+              mr: 1,
+              color: 'text.primary',
+              display: { lg: 'none' },
+            }}
+          >
+            <Iconify icon="eva:menu-2-fill" />
+          </IconButton>
 
-        {/* <Searchbar /> */}
-        <Box sx={{ flexGrow: 1 }} />
+          {/* <Searchbar /> */}
+          <Box sx={{ flexGrow: 1 }} />
 
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={{
-            xs: 0.5,
-            sm: 1,
-          }}
-        >
-          <LanguagePopover />
-          <NotificationsPopover />
-          <AccountPopover />
-        </Stack>
-      </StyledToolbar>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={{
+              xs: 0.5,
+              sm: 1,
+            }}
+          >
+            <LanguagePopover />
+            <NotificationsPopover />
+            <AccountPopover />
+          </Stack>
+        </StyledToolbar>
+      }
     </StyledRoot>
   );
 }

@@ -4,6 +4,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
+import {useWeb3} from "../../../contexts/Web3Context";
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const {data} = useWeb3();
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -54,7 +56,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={data.photoURL} alt="photoURL" />
       </IconButton>
 
       <Popover
@@ -78,10 +80,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {data.name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            chainlinkfan@gmail.com
           </Typography>
         </Box>
 

@@ -6,6 +6,7 @@ import { styled, alpha } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
 // mock
 import account from '../../../_mock/account';
+import {useWeb3} from "../../../contexts/Web3Context";
 // hooks
 import useResponsive from '../../../hooks/useResponsive';
 // components
@@ -36,6 +37,7 @@ Nav.propTypes = {
 
 export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
+  const {web3, data, setData} = useWeb3();
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -45,6 +47,17 @@ export default function Nav({ openNav, onCloseNav }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  const connectWithMetamask = async () => {
+    try {
+      await window.ethereum.enable();
+      const accounts = await web3.eth.getAccounts();
+      localStorage.setItem("address", accounts[0]);
+      window.location.assign("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const renderContent = (
     <Scrollbar
@@ -57,23 +70,31 @@ export default function Nav({ openNav, onCloseNav }) {
         <Logo />
       </Box>
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none">
-          <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
+      {data.loggedIn ?
+        <Box sx={{ mb: 5, mx: 2.5 }}>
+          <Link underline="none">
+            <StyledAccount>
+              <Avatar src={data.photoURL} alt="photoURL" />
 
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
+              <Box sx={{ ml: 2 }}>
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {data.name}
+                </Typography>
 
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </StyledAccount>
-        </Link>
-      </Box>
+                <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: "0.8rem" }}>
+                  chainlinkfan@gmail.com
+                </Typography>
+              </Box>
+            </StyledAccount>
+          </Link>
+        </Box>
+        :
+        <Box sx={{ mb: 5, mx: 2.5, mt: 3 }}>
+          <Button fullWidth size="large" color="inherit" variant="outlined" onClick={connectWithMetamask}>
+            Connect with Metamask
+          </Button>
+        </Box>
+      }
 
       <NavSection data={navConfig} />
 
@@ -97,9 +118,6 @@ export default function Nav({ openNav, onCloseNav }) {
             </Typography>
           </Box> */}
 
-          <Button href="https://linkedin.com/in/jasonyapri" target="_blank" variant="contained">
-            Upgrade to Plus
-          </Button>
         </Stack>
       </Box>
     </Scrollbar>

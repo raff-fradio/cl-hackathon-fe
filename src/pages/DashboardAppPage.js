@@ -38,7 +38,7 @@ export default function DashboardAppPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
+          {data.loggedIn ? "Hello, welcome back!" : "Dashboard"}
         </Typography>
 
         <Grid container spacing={3}>
