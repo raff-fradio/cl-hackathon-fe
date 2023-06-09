@@ -62,7 +62,7 @@ export default function UserPage() {
               <TextField value={username} onChange={e => setUsername(e.target.value)} placeholder='Username'/>
               <br /><br />
               <Typography variant="h6">Bio</Typography>
-              <TextField value={bio} onChange={e => setBio(e.target.value)} placeholder='Bio'/>
+              <TextField value={bio} onChange={e => setBio(e.target.value)} placeholder='Bio' multiline rows={3} maxRows={4}/>
               <br /><br />
               <Typography variant="h6">Email Address</Typography>
               <TextField value={email} onChange={e => setEmail(e.target.value)} placeholder='Email Address'/>
