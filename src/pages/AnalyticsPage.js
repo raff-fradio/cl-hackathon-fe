@@ -149,7 +149,7 @@ export default function AnalyticsPage() {
   return (
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> Analytics </title>
       </Helmet>
 
       <Container>
