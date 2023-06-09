@@ -59,16 +59,16 @@ export default function UserPage() {
 
         <Card sx={{p:4}}>
               <Typography variant="h6">Username</Typography>
-              <TextField value={username} onChange={e => setUsername(e.target.value)} placeholder='Username'/>
+              <TextField fullWidth value={username} onChange={e => setUsername(e.target.value)} placeholder='Username'/>
               <br /><br />
               <Typography variant="h6">Bio</Typography>
-              <TextField value={bio} onChange={e => setBio(e.target.value)} placeholder='Bio' multiline rows={3} maxRows={4}/>
+              <TextField fullWidth value={bio} onChange={e => setBio(e.target.value)} placeholder='Bio' multiline rows={3} maxRows={4}/>
               <br /><br />
               <Typography variant="h6">Email Address</Typography>
-              <TextField value={email} onChange={e => setEmail(e.target.value)} placeholder='Email Address'/>
+              <TextField fullWidth value={email} onChange={e => setEmail(e.target.value)} placeholder='Email Address'/>
               <br /><br />
               <Typography variant="h6">Wallet Address</Typography>
-              <TextField value={walletAddress} disabled placeholder='Wallet Address'/>
+              <TextField fullWidth value={walletAddress} disabled placeholder='Wallet Address'/>
               <br /><br />
 
               <Button variant="contained" color="primary" onClick={handleSave}>Save</Button>
