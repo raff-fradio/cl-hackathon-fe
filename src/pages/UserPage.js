@@ -31,9 +31,9 @@ import Scrollbar from '../components/scrollbar';
 
 export default function UserPage() {
 
-  const [username, setUsername] = useState('raff_fradio');
+  const [username, setUsername] = useState('raff.fradio');
   const [bio, setBio] = useState('I turn coffee into code');
-  const [email, setEmail] = useState('raff_fradio@gmail.com');
+  const [email, setEmail] = useState('raff.fradio@gmail.com');
   const [walletAddress, setWalletAddress] = useState('0x47331edc7220ad93D62130CE64c10F7166F4c947');
 
   const handleSave = () => {
