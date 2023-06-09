@@ -19,7 +19,7 @@ export function fPercent(number) {
 }
 
 export function fShortenNumber(number) {
-  const format = number ? numeral(number).format('0.00a') : '';
+  const format = number ? number.toLocaleString(undefined, {minimumFractionDigits: 2})  : '';
 
   return result(format, '.00');
 }
